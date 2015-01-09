@@ -23,7 +23,7 @@ class FM_Demo_Misc {
 	}
 
 	public function setup() {
-		FM_Demo_Data_Structures()->add_post_type( 'demo-misc', array( 'singular' => 'Miscellany', 'plural' => 'Miscellanies' ) );
+		FM_Demo_Data_Structures()->add_post_type( 'demo-misc', array( 'singular' => 'Miscellany', 'plural' => 'Miscellanies', 'supports' => array( 'title', 'editor' ) ) );
 		add_action( 'fm_post_demo-misc', array( $this, 'init' ) );
 	}
 
@@ -36,6 +36,15 @@ class FM_Demo_Misc {
 				'hidden_field'          => new Fieldmanager_Hidden( 'Hidden Field', array( 'default_value' => 'Fieldmanager was here' ) ),
 				'link_field'            => new Fieldmanager_Link( 'Link Field', array( 'description' => 'This is a text field that sanitizes the value as a URL' ) ),
 				'date_field'            => new Fieldmanager_Datepicker( 'Datepicker Field' ),
+				'validated_field'       => new Fieldmanager_TextField( 'Validated Field', array(
+					'validation_rules' => array(
+						'required' => false,
+						'maxlength' => 3
+					),
+					'validation_messages' => array(
+						'maxlength' => 'Max length is 3 characters.',
+					),
+				) ),
 				'date_customized_field' => new Fieldmanager_Datepicker( array(
 					'label'       => 'Datepicker Field with Options',
 					'date_format' => 'Y-m-d',

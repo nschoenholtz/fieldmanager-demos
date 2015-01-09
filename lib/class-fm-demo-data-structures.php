@@ -42,10 +42,11 @@ class FM_Demo_Data_Structures {
 		foreach ( $this->post_types as $type => $args ) {
 			$singular = ( ! empty( $args['singular'] ) ) ? $args['singular'] : $this->titleize( $type );
 			$plural = ( ! empty( $args['plural'] ) ) ? $args['plural'] : $singular . 's';
+			$supports = ( ! empty( $args['supports'] ) && is_array( $args['supports'] ) ) ? $args['supports'] : array( 'title' );
 
 			register_post_type( $type, array_merge( array(
 				'public' => true,
-				'supports' => array( 'title' ),
+				'supports' => $supports,
 				'labels' => array(
 					'name'               => $plural,
 					'singular_name'      => $singular,
